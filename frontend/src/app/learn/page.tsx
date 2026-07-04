@@ -41,7 +41,7 @@ export default function LearningCenterPage() {
             </div>
             <div>
               <h2 className="text-2xl font-bold font-heading mb-1 text-slate-900">Daily Challenge: Nutrition 101</h2>
-              <p className="text-slate-700">Complete today's quick quiz to earn a 5-day streak badge!</p>
+              <p className="text-slate-700">Complete today&apos;s quick quiz to earn a 5-day streak badge!</p>
             </div>
           </div>
           <Button size="lg" className="rounded-full px-8 bg-primary text-white hover:bg-primary/90 shadow-md">

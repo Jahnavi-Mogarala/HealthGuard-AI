@@ -153,7 +153,7 @@ export default function DashboardPage() {
                <div className="w-16 h-16 bg-accent/20 text-accent rounded-full flex items-center justify-center mb-6">
                  <Activity size={32} />
                </div>
-               <h3 className="text-2xl font-bold font-heading mb-4">Today's Health Tip</h3>
+               <h3 className="text-2xl font-bold font-heading mb-4">Today&apos;s Health Tip</h3>
                <p className="text-muted-foreground max-w-md">
                  "With the recent drop in AQI levels in your area, consider wearing an N95 mask when traveling outdoors and keep your home windows closed."
                </p>
