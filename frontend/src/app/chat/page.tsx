@@ -11,17 +11,63 @@ export default function ChatPage() {
   ]);
   const [input, setInput] = useState("");
   
-  const sendMessage = (e: React.FormEvent) => {
+  const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
     
-    setMessages(prev => [...prev, { role: "user", content: input }]);
+    const newMessages = [...messages, { role: "user", content: input }];
+    setMessages(newMessages);
     setInput("");
     
-    // Simulate AI typing for UI demo
-    setTimeout(() => {
-      setMessages(prev => [...prev, { role: "assistant", content: "**Disclaimer:** I am an AI, not a doctor. Based on your query, here is some educational information..." }]);
-    }, 1000);
+    // Add empty assistant message that we will stream into
+    setMessages(prev => [...prev, { role: "assistant", content: "" }]);
+    
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      const apiUrl = baseUrl.includes("localhost") 
+        ? `${baseUrl}/api/v1/chat/stream` 
+        : `/api/backend/api/v1/chat/stream`;
+        
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: newMessages })
+      });
+      
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+      
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+      
+      if (reader) {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          
+          const chunk = decoder.decode(value, { stream: true });
+          
+          setMessages(prev => {
+            const updated = [...prev];
+            const lastMsg = updated[updated.length - 1];
+            if (lastMsg.role === "assistant") {
+              lastMsg.content += chunk;
+            }
+            return updated;
+          });
+        }
+      }
+    } catch (error) {
+      setMessages(prev => {
+        const updated = [...prev];
+        const lastMsg = updated[updated.length - 1];
+        if (lastMsg.role === "assistant") {
+          lastMsg.content = "**Error:** Could not connect to HealthGuard AI. (Is your OPENAI_API_KEY set?)";
+        }
+        return updated;
+      });
+    }
   };
   
   return (
