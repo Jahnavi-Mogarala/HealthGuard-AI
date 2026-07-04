@@ -1,3 +1,1 @@
-backend
-docker-compose.yml
-.github
+# Removed backend ignore so Vercel can build it
