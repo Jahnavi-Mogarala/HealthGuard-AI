@@ -22,12 +22,16 @@ export default function Home() {
           <Link href="#about" className="hover:text-primary transition-colors">About</Link>
         </nav>
         <div className="flex items-center gap-4">
-          <Button variant="outline" className="hidden sm:flex text-primary border-primary hover:bg-primary hover:text-white rounded-full px-6">
-            Log In
-          </Button>
-          <Button className="bg-primary text-white hover:bg-primary/90 rounded-full px-6">
-            Sign Up
-          </Button>
+          <Link href="/login">
+            <Button variant="outline" className="hidden sm:flex text-primary border-primary hover:bg-primary hover:text-white rounded-full px-6">
+              Log In
+            </Button>
+          </Link>
+          <Link href="/register">
+            <Button className="bg-primary text-white hover:bg-primary/90 rounded-full px-6">
+              Sign Up
+            </Button>
+          </Link>
         </div>
       </header>
 
@@ -61,13 +65,17 @@ export default function Home() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Button size="lg" className="h-14 px-8 text-lg rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/30 group">
-              Get Started Now
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full border-border hover:bg-secondary/10">
-              View Outbreak Map
-            </Button>
+            <Link href="/register">
+              <Button size="lg" className="h-14 px-8 text-lg rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/30 group">
+                Get Started Now
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+            <Link href="/map">
+              <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full border-border hover:bg-secondary/10">
+                View Outbreak Map
+              </Button>
+            </Link>
           </div>
         </motion.div>
 
