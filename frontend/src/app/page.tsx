@@ -49,7 +49,7 @@ export default function Home() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            Smart India Hackathon 2024
+            Global Health Intelligence
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold font-heading tracking-tight text-foreground">
