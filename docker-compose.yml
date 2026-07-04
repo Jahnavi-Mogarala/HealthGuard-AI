@@ -33,6 +33,33 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
 
+  backend:
+    build:
+      context: ./backend
+    container_name: healthguard-backend
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+      - qdrant
+    environment:
+      - POSTGRES_SERVER=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=healthguard
+      
+  frontend:
+    build:
+      context: ./frontend
+    container_name: healthguard-frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
 volumes:
   postgres_data:
   redis_data:
